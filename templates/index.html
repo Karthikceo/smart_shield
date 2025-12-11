@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Patient Monitoring System</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="logo">
+                <span class="logo-icon">&#128736;</span>
+                <h1>Smart Patient Monitoring</h1>
+            </div>
+            <nav class="nav">
+                <a href="/" class="nav-link active">Live Monitor</a>
+                <a href="/dashboard" class="nav-link">Dashboard</a>
+            </nav>
+            <div class="status-badge" id="systemStatus">
+                <span class="status-dot"></span>
+                <span>System Ready</span>
+            </div>
+        </header>
+
+        <main class="main-content">
+            <div class="monitoring-section">
+                <div class="video-container">
+                    <div class="video-header">
+                        <h2>Live Camera Feed</h2>
+                        <div class="privacy-badge">
+                            <span class="privacy-icon">&#128274;</span>
+                            Privacy Protected
+                        </div>
+                    </div>
+                    <div class="video-wrapper">
+                        <video id="videoElement" autoplay playsinline></video>
+                        <canvas id="canvasElement"></canvas>
+                        <div class="video-overlay" id="videoOverlay">
+                            <p>Click "Start Monitoring" to begin</p>
+                        </div>
+                    </div>
+                    <div class="video-controls">
+                        <button id="startBtn" class="btn btn-primary">
+                            <span class="btn-icon">&#9658;</span>
+                            Start Monitoring
+                        </button>
+                        <button id="stopBtn" class="btn btn-secondary" disabled>
+                            <span class="btn-icon">&#9632;</span>
+                            Stop Monitoring
+                        </button>
+                    </div>
+                </div>
+
+                <div class="indicators-panel">
+                    <h2>Real-time Indicators</h2>
+                    
+                    <div class="indicator-card" id="fallIndicator">
+                        <div class="indicator-icon fall-icon">&#9888;</div>
+                        <div class="indicator-info">
+                            <h3>Fall Detection</h3>
+                            <p class="indicator-status">No Fall Detected</p>
+                            <div class="confidence-bar">
+                                <div class="confidence-fill" id="fallConfidence"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="indicator-card" id="aggressionIndicator">
+                        <div class="indicator-icon aggression-icon">&#9889;</div>
+                        <div class="indicator-info">
+                            <h3>Aggression Detection</h3>
+                            <p class="indicator-status">Normal Behavior</p>
+                            <div class="confidence-bar">
+                                <div class="confidence-fill" id="aggressionConfidence"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="indicator-card" id="riskyIndicator">
+                        <div class="indicator-icon risky-icon">&#9888;</div>
+                        <div class="indicator-info">
+                            <h3>Risky Behavior</h3>
+                            <p class="indicator-status">Safe Position</p>
+                            <div class="confidence-bar">
+                                <div class="confidence-fill" id="riskyConfidence"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="indicator-card emotion-card" id="emotionIndicator">
+                        <div class="indicator-icon emotion-icon" id="emotionIcon">&#128528;</div>
+                        <div class="indicator-info">
+                            <h3>Emotion State</h3>
+                            <p class="indicator-status" id="emotionStatus">Neutral</p>
+                            <div class="confidence-bar">
+                                <div class="confidence-fill" id="emotionConfidence"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="alerts-section">
+                <div class="alerts-header">
+                    <h2>Alerts Panel</h2>
+                    <button id="clearAlertsBtn" class="btn btn-small">Clear All</button>
+                </div>
+                <div class="alerts-list" id="alertsList">
+                    <div class="no-alerts">
+                        <span class="no-alerts-icon">&#10003;</span>
+                        <p>No alerts detected</p>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <footer class="footer">
+            <p>Smart Privacy-Aware AI/ML Patient Monitoring System</p>
+            <p class="footer-note">All data is processed locally. No faces or frames are stored.</p>
+        </footer>
+    </div>
+
+    <script src="/static/js/app.js"></script>
+</body>
+</html>
