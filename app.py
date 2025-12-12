@@ -193,7 +193,53 @@ def add_header(response):
     response.headers['Pragma'] = 'no-cache'
     response.headers['Expires'] = '0'
     return response
+@app.route('/upload_video', methods=['POST'])
+def upload_video():
+    try:
+        video_file = request.files.get("video")
+        if not video_file:
+            return jsonify({"error": "No video file provided"}), 400
+
+        # Save uploaded video
+        video_path = "uploaded_video.mp4"
+        video_file.save(video_path)
+
+        cap = cv2.VideoCapture(video_path)
+        fps = cap.get(cv2.CAP_PROP_FPS)
+        sample_rate = int(fps)  # analyze 1 frame per second
+
+        results_summary = []
+        frame_index = 0
+
+        while True:
+            ret, frame = cap.read()
+            if not ret:
+                break
+
+            # analyze only every 1 second
+            if frame_index % sample_rate == 0:
+                result = analyze_frame(frame)
+                results_summary.append(result)
+
+            frame_index += 1
+
+        cap.release()
+
+        return jsonify({
+            "ok": True,
+            "samples_analyzed": len(results_summary),
+            "results": results_summary
+        })
+
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+
+
 
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000, debug=True)
+    print("\n🔗 Your project is running at: http://127.0.0.1:5000/\n")
+    app.run(host='0.0.0.0', port=5000, debug=False)
+
+

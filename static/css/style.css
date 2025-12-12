@@ -655,3 +655,23 @@ body {
 ::-webkit-scrollbar-thumb:hover {
     background: var(--secondary-color);
 }
+/* Styled Output Container */
+#analysisOutput {
+    background: rgba(20, 20, 20, 0.9);   /* dark theme background */
+    color: #171616;                      /* white text */
+    padding: 20px;
+    margin-top: 20px;
+    border-radius: 12px;
+
+    border: 2px solid rgba(255, 140, 0, 0.6);   /* orange border */
+
+    box-shadow: 0 0 15px rgba(245, 137, 4, 0.4); /* glowing effect */
+
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 1.6;
+
+    max-height: 400px;        /* scrolls if output is long */
+    overflow-y: auto;
+    white-space: pre-wrap;     /* keeps formatting */
+}

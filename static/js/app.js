@@ -431,3 +431,34 @@ class PatientMonitoringApp {
 document.addEventListener('DOMContentLoaded', () => {
     window.monitoringApp = new PatientMonitoringApp();
 });
+// Handle video upload form submission
+const videoForm = document.getElementById("videoUploadForm");
+videoForm.addEventListener("submit", async (e) => {
+    e.preventDefault();  // prevent page reload
+    const formData = new FormData(videoForm);
+    
+    const response = await fetch("/upload_video", {
+        method: "POST",
+        body: formData
+    });
+    
+    const data = await response.json();
+    console.log("Video Analysis Result:", data);
+    alert("Video Analysis Completed:\n" + JSON.stringify(data, null, 2));
+});
+document.querySelector("#videoUploadForm").addEventListener("submit", async function (event) {
+    event.preventDefault();
+
+    let formData = new FormData(this);
+
+    let response = await fetch("/upload_video", {
+        method: "POST",
+        body: formData
+    });
+
+    let result = await response.json();
+
+    document.getElementById("analysisOutput").innerText =
+        JSON.stringify(result, null, 2);
+});
+
